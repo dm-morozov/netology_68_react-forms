@@ -40,3 +40,41 @@
 .read-the-docs {
   color: #888;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Poppins:wght@400;600&display=swap');
+
+form {
+  font-family: 'Poppins', sans-serif;
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+input,
+select,
+textarea {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 14px;
+}
+
+button {
+  font-family: 'Montserrat', sans-serif;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #4338ca;
+}
