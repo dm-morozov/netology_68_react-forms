@@ -18,7 +18,7 @@ const WorkoutTable: FC<WorkoutTableProps> = ({ workouts, onDelete }) => {
       </thead>
       <tbody>
         {workouts.map((workout: Workout) => (
-          <tr>
+          <tr key={workout.id} className={styles.tableRow}>
             <td>{workout.date}</td>
             <td>{workout.distance}</td>
             <td className={styles.actionsCell}>

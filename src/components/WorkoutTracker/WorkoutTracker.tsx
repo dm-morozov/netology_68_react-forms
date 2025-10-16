@@ -4,6 +4,7 @@ import styles from './WorkoutTracker.module.css'
 import type { Workout } from '../../types/workout'
 import { v4 as uuidv4 } from 'uuid'
 import { useState } from 'react'
+import WorkoutTable from './WorkoutTable'
 
 // Начальные данные (изменим формат даты на тот, что дает input type="date")
 const initialWorkouts: Workout[] = [
@@ -20,6 +21,7 @@ const initialWorkouts: Workout[] = [
  */
 const WorkoutTracker: React.FC = () => {
   const [workouts, setWorkouts] = useState<Workout[]>(initialWorkouts)
+
   const sortByDateDesk = (arr: Workout[]): Workout[] => {
     return [...arr].sort(
       // b.date - a.date дает сортировку по убыванию (самая новая дата сверху)
@@ -68,10 +70,19 @@ const WorkoutTracker: React.FC = () => {
     // СОРТИРОВКА и Обновление состояния
     const sortedWorkouts = sortByDateDesk(updatedWorkouts)
 
-    console.log('--- Трекер: Итоговое новое состояние ---')
-    console.log(sortedWorkouts)
+    // console.log('--- Трекер: Итоговое новое состояние ---')
+    // console.log(sortedWorkouts)
 
     setWorkouts(sortedWorkouts)
+  }
+
+  const handleDelete = (idToDelete: string) => {
+    // console.log(`--- Трекер: Удаляю запись с ID: ${idToDelete} ---`)
+    const updatedWorkouts = workouts.filter(
+      (workout) => workout.id !== idToDelete
+    )
+
+    setWorkouts(updatedWorkouts)
   }
 
   return (
@@ -79,6 +90,8 @@ const WorkoutTracker: React.FC = () => {
       <h2 className="h2-title">Трекер тренировок</h2>
       {/* Передаем обработчик в форму */}
       <WorkoutForm onAddOrUpdateWorkout={handleAddOrUpdateWorkout} />
+
+      <WorkoutTable workouts={workouts} onDelete={handleDelete} />
     </div>
   )
 }

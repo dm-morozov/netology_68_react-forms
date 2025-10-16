@@ -1,0 +1,160 @@
+/* src/components/WorkoutTracker/WorkoutTracker.module.css (Дополнения) */
+
+.trackerContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* === Workout Form === */
+
+.workoutForm {
+  width: 100%;
+  max-width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+  gap: 12px;
+  margin: 0;
+  background-color: #ffffff;
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.workoutInput {
+  padding: 10px 14px;
+  font-size: 15px;
+  border: 1px solid #d0d7de;
+  background-color: #fff;
+  color: #24292f;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.workoutInput::placeholder {
+  color: #d0d7de;
+}
+
+.workoutInput::-webkit-outer-spin-button,
+.workoutInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.workoutInput[type='date'] {
+  position: relative;
+  background-image: url("data:image/svg+xml,%3Csvg fill='black' xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath d='M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px 18px;
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+/* Сохраняем кликабельность календаря */
+.workoutInput[type='date']::-webkit-calendar-picker-indicator {
+  opacity: 0; /* прячем визуально */
+  position: absolute;
+  right: 10px;
+  width: 24px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.workoutInput:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.workoutForm button {
+  background: linear-gradient(135deg, #4a90e2, #007bff);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  transition: all 0.2s ease-in-out;
+}
+
+.workoutForm button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #007bff, #0056d6);
+}
+
+.workoutForm button:active {
+  transform: scale(0.97);
+}
+
+/*  === Workout Table ===  */
+
+.workoutTable {
+  width: 100%;
+  border-collapse: separate; /* ← важно для закруглений */
+  border-spacing: 0; /* убираем лишние промежутки */
+  margin-top: 20px;
+  border-radius: 12px; /* скруглённые углы */
+  overflow: hidden; /* чтобы углы реально скруглились */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* лёгкая тень */
+  background-color: #fff; /* белый фон для чистоты */
+}
+
+.workoutTable th,
+.workoutTable td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.workoutTable th {
+  background: linear-gradient(135deg, #4a90e2, #007bff);
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+  padding: 12px;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+}
+
+.workoutTable td {
+  text-align: center;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+  color: #333;
+}
+
+.workoutTable tr:hover td {
+  background-color: #eef5ff;
+}
+
+.tableRow:nth-child(even) {
+  background-color: #f9fbff; /* более мягкий оттенок */
+}
+
+.actionsCell {
+  width: 100px;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  color: #ff4d4f;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
+
+.deleteButton:hover {
+  color: white;
+  background-color: #ff4d4f;
+  transform: scale(1.1);
+}
