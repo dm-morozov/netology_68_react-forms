@@ -1,73 +1,89 @@
-# React + TypeScript + Vite
+# Домашнее задание к занятию «Формы»
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## Статус проекта
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[![Netology React + TypeScript Build](https://github.com/dm-morozov/netology_68_react-forms/actions/workflows/web.yaml/badge.svg)](https://github.com/dm-morozov/netology_68_react-forms/actions/workflows/web.yaml)
+![Netology](https://img.shields.io/badge/React-TypeScript-blue)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🎯 Обзор Проектов
 
-## Expanding the ESLint configuration
+Данный репозиторий содержит два учебных React-приложения, разработанных с использованием TypeScript, которые фокусируются на работе с формами, управлении состоянием, валидации и манипуляции с массивами.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1\. Конвертер Цвета (HEX в RGB) 🎨
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Небольшое приложение для ввода и валидации HEX-цвета с мгновенным отображением результата и визуальной обратной связью.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 2\. Учёт Тренировок 💪
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Приложение для ведения журнала тренировок/прогулок, которое демонстрирует управление сложным состоянием (массив объектов), обработку событий, а также логику суммирования и сортировки данных.
+
+---
+
+## 💡 Освоенные Концепции
+
+В ходе разработки были применены следующие ключевые принципы и технологии:
+
+### React/TypeScript Основы
+
+- **Контролируемые Компоненты (Controlled Components):** Использование `useState` для управления значением каждого поля ввода (`<input>`) в форме.
+- **Управление Потоком Данных:** Реализация потока данных **снизу-вверх** (из дочерней формы в родительский трекер) с помощью передачи функций-обработчиков через пропсы (`onAddOrUpdateWorkout`).
+- **Асинхронность `useState`:** Понимание того, что обновление состояния является асинхронным процессом, и как это влияет на `console.log`.
+
+### Состояние и Жизненный Цикл
+
+- **Хук `useEffect`:** Использование для реализации **побочных эффектов**, не связанных напрямую с рендером, например, для изменения стилей внешнего DOM-элемента (`container.style.backgroundColor`).
+- **Хук `useRef`:** Использование для получения прямой, "иммутабельной" ссылки на DOM-элемент компонента (`containerRef`) без использования `document.querySelector`.
+
+### Манипуляция Данными и Логика
+
+- **Иммутабельность Состояния:** Обновление массивов и объектов состояния (`workouts`) всегда происходит через создание _новых_ массивов (`[...workouts, newEntry]`) и объектов, что является краеугольным камнем работы в React.
+- **Сложная Логика Массивов (CRUD):**
+  - **Добавление/Суммирование:** Поиск существующей записи по дате (`.findIndex()`) и обновление ее значения (`.map()`).
+  - **Удаление:** Фильтрация массива для исключения элемента по уникальному ID (`.filter()`).
+  - **Сортировка:** Корректная сортировка массива по датам (по убыванию) с использованием `new Date().getTime()`.
+- **Валидация и Форматирование:**
+  - **Форма:** Реализация фильтрации ввода (только HEX-символы) и контроль длины прямо в обработчике `onChange`.
+  - **Таблица:** Форматирование даты из **ISO-формата** (`YYYY-MM-DD`) в **ДД.ММ.ГГГГ** для отображения.
+
+### Архитектура
+
+- **ООП-Подход:** Разделение логики (функции `processHexInput` в `utils`) от UI-компонентов.
+- **CSS Modules:** Использование `.module.css` для обеспечения локальной области видимости и избежания конфликтов стилей.
+
+---
+
+## 🧩 Структура Проектов
+
+```
+src/
+├── components/
+│   ├── ColorConverter/              # Проект 1: Конвертер цвета
+│   │   ├── ColorConverter.tsx
+│   │   └── ColorConverter.module.css
+│   ├── WorkoutTracker/              # Проект 2: Трекер тренировок
+│   │   ├── WorkoutTracker.tsx       # Контейнер: состояние, логика суммирования/сортировки/удаления
+│   │   ├── WorkoutForm.tsx          # Форма ввода
+│   │   ├── WorkoutTable.tsx         # Таблица отображения
+│   │   └── WorkoutTracker.module.css
+│   └── ...
+├── types/                           # Общие TypeScript интерфейсы
+│   ├── color.ts
+│   └── workout.ts
+├── utils/                           # Чистая (не зависящая от React) логика
+│   └── colorUtils.ts
+└── App.tsx                          # Главный компонент
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📧 Контакты
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Если возникнут вопросы, пишите:
+
+- ![LinkedIn](./svg/linkedin-icon.svg) [LinkedIn](https://www.linkedin.com/in/dm-morozov/)
+- ![Telegram](./svg/telegram.svg) [Telegram](https://t.me/dem2014)
+- ![GitHub](./svg/github-icon.svg) [GitHub](https://github.com/dm-morozov/)
