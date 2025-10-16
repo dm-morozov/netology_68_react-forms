@@ -12,3 +12,7 @@ export interface Workouts {
 }
 
 export type SortOrder = 'asc' | 'desc'
+
+export interface WorkoutFormProps {
+  onAddOrUpdateWorkout: (NewEntry: Omit<Workout, 'id'>) => void
+}

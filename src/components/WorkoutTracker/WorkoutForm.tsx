@@ -1,8 +1,9 @@
 // src/components/WorkoutTracker/WorkoutForm.tsx
 import { useState, type ChangeEvent, type FC, type FormEvent } from 'react'
 import styles from './WorkoutTracker.module.css'
+import type { WorkoutFormProps } from '../../types/workout'
 
-const WorkoutForm: FC = () => {
+const WorkoutForm: FC<WorkoutFormProps> = ({ onAddOrUpdateWorkout }) => {
   // Создадим состояния для каждого поля ввода
   const [date, setDate] = useState('')
   const [distance, setDistance] = useState('')
@@ -22,6 +23,9 @@ const WorkoutForm: FC = () => {
     console.log('Дата:', date)
     console.log('Дистанция:', distance)
 
+    // Передаем данные в родительский компонент
+    onAddOrUpdateWorkout({ date, distance: parseFloat(distance) })
+
     // Очистим поля ввода
     setDate('')
     setDistance('')
@@ -31,6 +35,7 @@ const WorkoutForm: FC = () => {
     <form className={styles.workoutForm} onSubmit={handleSubmit}>
       <input
         type="date"
+        name="date"
         value={date}
         placeholder="Дата (ДД.ММ.ГГГГ)"
         className={styles.workoutInput}
@@ -40,6 +45,7 @@ const WorkoutForm: FC = () => {
       />
       <input
         type="number"
+        name="distance"
         value={distance}
         className={styles.workoutInput}
         placeholder="Дистанция (км)"
