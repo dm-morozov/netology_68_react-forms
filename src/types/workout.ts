@@ -16,3 +16,8 @@ export type SortOrder = 'asc' | 'desc'
 export interface WorkoutFormProps {
   onAddOrUpdateWorkout: (NewEntry: Omit<Workout, 'id'>) => void
 }
+
+export interface WorkoutTableProps {
+  workouts: Workout[]
+  onDelete: (id: string) => void
+}

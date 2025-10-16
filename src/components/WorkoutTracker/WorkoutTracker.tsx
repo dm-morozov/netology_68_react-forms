@@ -68,6 +68,9 @@ const WorkoutTracker: React.FC = () => {
     // СОРТИРОВКА и Обновление состояния
     const sortedWorkouts = sortByDateDesk(updatedWorkouts)
 
+    console.log('--- Трекер: Итоговое новое состояние ---')
+    console.log(sortedWorkouts)
+
     setWorkouts(sortedWorkouts)
   }
 
