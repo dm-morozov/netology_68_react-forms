@@ -7,6 +7,13 @@ const WorkoutTable: FC<WorkoutTableProps> = ({ workouts, onDelete }) => {
     return <p>Нет данных о тренировках. Добавьте первую запись.</p>
   }
 
+  const formatISODate = (isoDate: string): string => {
+    if (!isoDate || isoDate.length !== 10) return isoDate
+
+    const parts = isoDate.split('-')
+    return `${parts[2]}.${parts[1]}.${parts[0]}`
+  }
+
   return (
     <table className={styles.workoutTable}>
       <thead>
@@ -19,7 +26,7 @@ const WorkoutTable: FC<WorkoutTableProps> = ({ workouts, onDelete }) => {
       <tbody>
         {workouts.map((workout: Workout) => (
           <tr key={workout.id} className={styles.tableRow}>
-            <td>{workout.date}</td>
+            <td>{formatISODate(workout.date)}</td>
             <td>{workout.distance}</td>
             <td className={styles.actionsCell}>
               <button

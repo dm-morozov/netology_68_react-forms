@@ -38,7 +38,7 @@ const WorkoutForm: FC<WorkoutFormProps> = ({ onAddOrUpdateWorkout }) => {
         name="date"
         value={date}
         placeholder="Дата (ДД.ММ.ГГГГ)"
-        className={styles.workoutInput}
+        className={styles.workoutInput + ' ' + styles.dateInput}
         // При изменении обновляем состояние даты
         onChange={handleDateChange}
         required
@@ -47,7 +47,7 @@ const WorkoutForm: FC<WorkoutFormProps> = ({ onAddOrUpdateWorkout }) => {
         type="number"
         name="distance"
         value={distance}
-        className={styles.workoutInput}
+        className={styles.workoutInput + ' ' + styles.distanceInput}
         placeholder="Дистанция (км)"
         // При изменении обновляем состояние дистанции
         onChange={handleDistanceChange}

@@ -8,9 +8,9 @@ import WorkoutTable from './WorkoutTable'
 
 // Начальные данные (изменим формат даты на тот, что дает input type="date")
 const initialWorkouts: Workout[] = [
-  { id: uuidv4(), date: '2023-07-20', distance: 5.7 },
-  { id: uuidv4(), date: '2023-07-19', distance: 14.2 },
-  { id: uuidv4(), date: '2023-07-18', distance: 2.0 },
+  { id: uuidv4(), date: '2025-10-16', distance: 5.7 },
+  { id: uuidv4(), date: '2025-10-15', distance: 14.2 },
+  { id: uuidv4(), date: '2025-10-14', distance: 2.0 },
 ]
 
 /**
@@ -24,8 +24,8 @@ const WorkoutTracker: React.FC = () => {
 
   const sortByDateDesk = (arr: Workout[]): Workout[] => {
     return [...arr].sort(
-      // b.date - a.date дает сортировку по убыванию (самая новая дата сверху)
-      (a, b) => new Date(a.date).getDate() - new Date(b.date).getDate()
+      // Сортировка по убыванию (от новой к старой)
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     )
   }
 
