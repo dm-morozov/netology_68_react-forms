@@ -1,9 +1,10 @@
-//  Информация о пройденных километрах
+// src/types/workout.ts
 
+//  Информация о пройденных километрах
 export interface Workout {
   id: string
   date: string
-  distance: string
+  distance: number
 }
 
 export interface Workouts {

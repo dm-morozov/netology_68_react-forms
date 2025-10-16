@@ -1,8 +1,8 @@
 // src/components/WorkoutTracker/WorkoutForm.tsx
-import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { useState, type ChangeEvent, type FC, type FormEvent } from 'react'
 import styles from './WorkoutTracker.module.css'
 
-const WorkoutForm = () => {
+const WorkoutForm: FC = () => {
   // Создадим состояния для каждого поля ввода
   const [date, setDate] = useState('')
   const [distance, setDistance] = useState('')
